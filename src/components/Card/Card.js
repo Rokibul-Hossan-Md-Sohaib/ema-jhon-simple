@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 const Card = (props) => {
     const card = props.card
-    const total = card.reduce((total, pro) => total + pro.price, 0);//we can also do this by for-loop
+    const total = card.reduce((total, pro) => total + pro.price * pro.quantity, 0 );//we can also do this by for-loop
     let shipping = 0
     if (total > 35) {
         shipping = 0;
@@ -24,6 +25,10 @@ const Card = (props) => {
             <p><small>Shipping Cost :{shipping}</small></p>
             <p><small>Tax + Vat :{tax}</small></p>
             <p>total price: {grandTotal}</p>
+            <br/>
+           {
+               props.children
+           }
         </div>
     );
 };

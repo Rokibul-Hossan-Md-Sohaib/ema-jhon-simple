@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -14,10 +14,14 @@ import Review from './components/Review/Review';
 import Manage from './components/Manage/Manage';
 import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import Login from './components/Login/Login';
+
+export const UserContext= createContext();
 
 function App() {
   return (
     <div>
+      <UserContext.Provider value={"kudu"}>
        <Header></Header>
       <Router>
         <Switch>
@@ -36,12 +40,15 @@ function App() {
           <Route path="/product/:productKey">
             <ProductDetail></ProductDetail>
           </Route>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
         </Switch>
       </Router>
-     
+      </UserContext.Provider>
       
     </div>
   );

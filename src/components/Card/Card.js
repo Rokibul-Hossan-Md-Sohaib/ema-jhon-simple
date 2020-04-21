@@ -1,8 +1,11 @@
 import React from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../../App';
 
 
 const Card = (props) => {
     const card = props.card
+    const user = useContext(UserContext);
     const total = card.reduce((total, pro) => total + pro.price * pro.quantity, 0 );//we can also do this by for-loop
     let shipping = 0
     if (total > 35) {
@@ -29,6 +32,7 @@ const Card = (props) => {
            {
                props.children
            }
+           <p>{user}</p>
         </div>
     );
 };

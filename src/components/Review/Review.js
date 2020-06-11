@@ -6,11 +6,14 @@ import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Card from '../Card/Card';
 import happyImage from '../../images/giphy.gif';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../Login/useAuth';
 
 
 const Review = () => {
     const [card, setCard ]=useState([]);
      const [orderPlaced , setOrderPlaced]=  useState(false);
+     const auth =useAuth();
     const handlePlaceOrder = ()=>{
         setOrderPlaced(true);
         setCard([]);
@@ -56,10 +59,19 @@ const Review = () => {
            {
                thankyou
            }
+           {
+               !card.length && <h1> Please Bye Some Product <a href="/shop">Enjoy Shopping</a></h1>
+           }
         </div>
         <div className="card-container">
             <Card card={card}>
-                <button onClick={handlePlaceOrder} className="main-btn"> Place Order</button>
+               <Link to ="/shipment">
+                { auth.user ?
+                    <button  className="main-btn"> Proceed Checkout</button>
+                :
+                <button  className="main-btn"> Log Proceed</button>
+                }
+                </Link>
             </Card>
         </div>
         </div>

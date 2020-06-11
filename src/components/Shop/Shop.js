@@ -20,7 +20,7 @@ const Shop = () => {
 
         })
         setCard(previousCard);
-    }, [])
+    }, [] )
     const handleAddProduct =(product)=>{
         const toBeAdded =product.key;
         const sameProduct = card.find(pd=>pd.key === toBeAdded);
@@ -29,8 +29,9 @@ const Shop = () => {
         if(sameProduct){
             count = sameProduct.quantity +1;
             sameProduct.quantity=count;
-            const others = card.find(pd=>pd.key === toBeAdded);
+            const others = card.find(pd=>pd.key !== toBeAdded);
             newCard =[...others,sameProduct];
+         console.log(newCard);
         }
         else{
             product.quantity=1;
@@ -48,7 +49,9 @@ const Shop = () => {
                         key={pd.key}
                         ShowAddToCard ={true}
                         handleAddProduct={handleAddProduct}
-                        product ={pd}></Product>)
+                        product ={pd}>
+
+                        </Product>)
             }   
             </div>
             

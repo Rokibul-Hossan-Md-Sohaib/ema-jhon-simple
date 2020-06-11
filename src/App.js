@@ -15,13 +15,15 @@ import Manage from './components/Manage/Manage';
 import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Login from './components/Login/Login';
+import { AuthContextProvider, PrivateRoute } from './components/Login/useAuth';
+import Shipment from './components/Shipment/Shipment';
 
-export const UserContext= createContext();
+
 
 function App() {
   return (
     <div>
-      <UserContext.Provider value={"kudu"}>
+      <AuthContextProvider>
        <Header></Header>
       <Router>
         <Switch>
@@ -43,12 +45,15 @@ function App() {
           <Route path="/login">
             <Login></Login>
           </Route>
+          <PrivateRoute path ="/shipment">
+            <Shipment></Shipment>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
         </Switch>
       </Router>
-      </UserContext.Provider>
+      </AuthContextProvider>
       
     </div>
   );

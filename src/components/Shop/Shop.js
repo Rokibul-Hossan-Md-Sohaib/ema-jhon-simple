@@ -7,20 +7,31 @@ import { addToDatabaseCard, getDatabaseCard } from '../../utilities/databaseMana
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const Shop = () => {
-    const first10 =fakeData.slice(0,10);
-    const [products, setProducts] = useState(first10);
+   
+    const [products, setProducts] = useState([]);
     const[card, setCard]=useState([]);
+
+    useEffect(() =>{
+        fetch('http://localhost:3001/products')
+        .then(res=> res.json())
+        .then(data=>{
+            setProducts(data);
+        })
+    },[])
+
     useEffect(() =>{
         const savedCard =getDatabaseCard();
         const productKeys= Object.keys(savedCard);
+       if(products.length){
         const previousCard = productKeys.map(existingKey=>{
-        const product = fakeData.find(pd=>pd.key === existingKey)
-        product.quantity=savedCard[existingKey];
-        return product;
-
-        })
-        setCard(previousCard);
-    }, [] )
+            const product = products.find(pd=>pd.key === existingKey)
+            product.quantity=savedCard[existingKey];
+            return product;
+    
+            })
+            setCard(previousCard);
+       }
+    }, [products] )
     const handleAddProduct =(product)=>{
         const toBeAdded =product.key;
         const sameProduct = card.find(pd=>pd.key === toBeAdded);

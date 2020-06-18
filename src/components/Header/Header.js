@@ -11,8 +11,8 @@ const Header = () => {
            <img src={logo} alt=""/>
            <nav>
                <a href="/shop">Shop</a>
-               <a href="review">Review</a>
-               <a href="manage">Manage Inventory</a>
+               <a href="/review">Review</a>
+               <a href="/inventory">Inventory</a>
                {
                    auth.user && <span style={{color: 'yellow'}}>Welcome {auth.user.name}</span>
                    

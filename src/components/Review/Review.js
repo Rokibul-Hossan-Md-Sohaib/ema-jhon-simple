@@ -1,24 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getDatabaseCard, removeFromDatabaseCard, processOrder } from '../../utilities/databaseManager';
-import fakeData from '../../fakeData';
+import { getDatabaseCard, removeFromDatabaseCard} from '../../utilities/databaseManager';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Card from '../Card/Card';
-import happyImage from '../../images/giphy.gif';
+
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Login/useAuth';
 
 
 const Review = () => {
     const [card, setCard ]=useState([]);
-     const [orderPlaced , setOrderPlaced]=  useState(false);
+     
      const auth =useAuth();
-    const handlePlaceOrder = ()=>{
-        setOrderPlaced(true);
-        setCard([]);
-        processOrder();
-    }
+ 
     const removeProduct = (productKey)=>{
            const newCard =card.filter(pd => pd.key !==productKey)
            setCard(newCard);
@@ -29,19 +24,28 @@ const Review = () => {
     useEffect(()=>{
         const savedCard = getDatabaseCard();
         const productKeys= Object.keys(savedCard);
-        const cardProduct = productKeys.map(key => {
-            const product = fakeData.find(pd=> pd.key ===key);
-            product.quantity = savedCard[key];
-            return product
-        });
-        setCard(cardProduct)
+        fetch('http://localhost:3001/getProductKey',{
+            method: 'post',
+         headers: {
+            'Content-Type': 'application/json'
+            
+          },
+         body: JSON.stringify(productKeys)
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            console.log(data)
+            const cardProduct = productKeys.map(key => {
+                const product = data.find(pd=> pd.key ===key);
+                product.quantity = savedCard[key];
+                return product
+            });
+            setCard(cardProduct)
+        })
+       
     }, []);
 
-    let thankyou;
-    if(orderPlaced){
-        thankyou= <img src={happyImage} alt=""/>
-
-    }
+    
 
     return (
         <div className="twin-container">
@@ -56,9 +60,7 @@ const Review = () => {
                  </ReviewItem>)
                
            }
-           {
-               thankyou
-           }
+          
            {
                !card.length && <h1> Please Bye Some Product <a href="/shop">Enjoy Shopping</a></h1>
            }

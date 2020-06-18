@@ -11,12 +11,13 @@ import {
   Link
 } from "react-router-dom";
 import Review from './components/Review/Review';
-import Manage from './components/Manage/Manage';
+
 import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Login from './components/Login/Login';
 import { AuthContextProvider, PrivateRoute } from './components/Login/useAuth';
 import Shipment from './components/Shipment/Shipment';
+import Inventory from './components/Inventory/Inventory';
 
 
 
@@ -33,8 +34,8 @@ function App() {
           <Route path="/review">
             <Review></Review>
           </Route>
-          <Route path="/manage">
-            <Manage></Manage>
+          <Route path="/inventory">
+            <Inventory></Inventory>
           </Route>
           <Route exact path="/">
             <Shop></Shop>

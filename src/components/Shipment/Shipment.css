@@ -1,17 +1,21 @@
 .ship-form{
 
-    padding-left: 100px;
-    align-content: center;
-    justify-content: center;
-    margin-left: 200px;
+    padding-left: 10px;
+    margin-left: 20px;
 }
 
 .ship-form input{
     display: block;
-    padding: 10px;
-    margin-top: 25px;
-   width: 500px;
+    padding: 7px;
+    margin-top: 15px;
+   width: 350px;
     background-color: aquamarine;
+}
+.ship-form h1{
+    background-color: aliceblue;
+    width: 200px;
+    padding: 10px,20px;
+    color: indigo
 }
 .error{
     color: red;
@@ -22,5 +26,20 @@
     background-color: blue;
    
 
+}
+
+.payment{
+   margin-left:72%;
+}
+
+.payment h1{
+    background: repeating-linear-gradient(45deg, black, transparent 100px);
+    color: lightslategrey;
+   width: 250px;
+    
+}
+.shipping h2{
+    color: aquamarine;
+    background-color: cadetblue;
 }
 

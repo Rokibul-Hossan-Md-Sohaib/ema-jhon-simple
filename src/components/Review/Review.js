@@ -24,7 +24,7 @@ const Review = () => {
     useEffect(()=>{
         const savedCard = getDatabaseCard();
         const productKeys= Object.keys(savedCard);
-        fetch('http://localhost:3001/getProductKey',{
+        fetch('https://ancient-hollows-50116.herokuapp.com/getProductKey',{
             method: 'post',
          headers: {
             'Content-Type': 'application/json'

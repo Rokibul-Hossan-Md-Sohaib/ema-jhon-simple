@@ -12,7 +12,7 @@ const Shop = () => {
     const[card, setCard]=useState([]);
 
     useEffect(() =>{
-        fetch('http://localhost:3001/products')
+        fetch('https://ancient-hollows-50116.herokuapp.com/products')
         .then(res=> res.json())
         .then(data=>{
             setProducts(data);
